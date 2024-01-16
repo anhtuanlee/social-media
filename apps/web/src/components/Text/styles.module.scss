@@ -1,0 +1,74 @@
+.text {
+  box-sizing: border-box;
+}
+.h1 {
+  @include make-typography($h1);
+  // font-family: var(--title_font);
+}
+
+.h2 {
+  @include make-typography($h2);
+  font-family: var(--poppins);
+}
+
+.h3 {
+  @include make-typography($h3);
+  font-family: var(--poppins);
+}
+
+.h4 {
+  @include make-typography($h4);
+  font-family: var(--poppins);
+}
+
+.body_lg__r {
+  @include make-typography($body_lg__r);
+  font-family: var(--rubik);
+}
+.body_lg__s {
+  @include make-typography($body_lg__s);
+  font-family: var(--rubik);
+}
+.body_lg__b {
+  @include make-typography($body_lg__b);
+  font-family: var(--rubik);
+}
+
+.body_md__r {
+  @include make-typography($body_md__r);
+  font-family: var(--rubik);
+}
+.body_md__s {
+  @include make-typography($body_md__s);
+  font-family: var(--rubik);
+}
+.body_md__b {
+  @include make-typography($body_md__b);
+  font-family: var(--rubik);
+}
+
+.body_sm__r {
+  @include make-typography($body_sm__r);
+  font-family: var(--rubik);
+}
+.body_sm__s {
+  @include make-typography($body_sm__s);
+  font-family: var(--rubik);
+}
+.body_sm__b {
+  @include make-typography($body_sm__b);
+  font-family: var(--rubik);
+}
+.body_s__r {
+  @include make-typography($body_s__r);
+  font-family: var(--rubik);
+}
+.body_s__s {
+  @include make-typography($body_s__s);
+  font-family: var(--rubik);
+}
+.body_s__b {
+  @include make-typography($body_s__b);
+  font-family: var(--rubik);
+}
+@include make-typography-color;

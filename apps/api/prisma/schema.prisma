@@ -1,0 +1,208 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_NOUN_URL")
+}
+
+model User {
+  id         String     @id @default(uuid())
+  first_name String
+  last_name  String
+  full_name  String
+  email      String     @unique
+  user_name  String     @unique
+  phone      String     @unique
+  avatar     String     @default("https://thicc-af.mywaifulist.moe/waifus/ganyu-genshin-impact/I12RIY4CzYIZtavjhONgqZ9ZxGMKfdQRo0x0BQQ0.jpg")
+  cover      String     @default("https://climate.onep.go.th/wp-content/uploads/2020/01/default-image.jpg")
+  role       Role       @default(USER)
+  gender     TypeGender
+  bithday    DateTime
+  createAt   DateTime   @default(now())
+  updateAt   DateTime   @updatedAt
+
+  auth          Auth?
+  invition_list FriendRequest[] @relation("InvitionList")
+  invited_list  FriendRequest[] @relation("InvitedList")
+  followed_by   User[]          @relation("UserFollows")
+  following     User[]          @relation("UserFollows")
+  post          Post[]
+  comments      Comments[]      @relation("CommentUser")
+  reaction      Reaction[]
+  views         View[]
+  friends       FriendOfUser[]  @relation("Friends")
+  FriendOfUser  FriendOfUser[]  @relation("FriendOfUser")
+
+  @@unique([user_name, email, phone])
+}
+
+// handle later 
+
+model FriendOfUser {
+  id            String             @id @default(uuid())
+  user_name     String
+  friend_name   String
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  relation_ship RelationshipStatus @default(FRIEND)
+
+  user   User @relation("Friends", fields: [user_name], references: [user_name], onDelete: Cascade)
+  friend User @relation("FriendOfUser", fields: [friend_name], references: [user_name], onDelete: Cascade)
+
+  @@unique([user_name, friend_name])
+  @@index([user_name, friend_name])
+}
+
+model Auth {
+  id        String @id @default(uuid())
+  user_name String @unique
+  email     String @unique
+  phone     String @unique
+  password  String
+
+  user User @relation(fields: [user_name, email, phone], references: [user_name, email, phone], onDelete: Cascade)
+
+  @@unique([user_name, email, phone])
+}
+
+model FriendRequest {
+  id                   String           @default(uuid())
+  invite_friend_status TypeStatusInvite @default(PENDING)
+  createAt             DateTime         @default(now())
+  updateAt             DateTime         @updatedAt
+
+  invition_name String
+  invited_name  String
+  invition      User   @relation("InvitionList", fields: [invition_name], references: [user_name], onDelete: Cascade, onUpdate: Cascade)
+  invited       User   @relation("InvitedList", fields: [invited_name], references: [user_name], onDelete: Cascade, onUpdate: Cascade)
+
+  @@id([invition_name, invited_name])
+}
+
+model Post {
+  id      String   @id @default(uuid())
+  content String[]
+  img     String[]
+  mode    ModePost @default(PUBLIC)
+
+  user_name String
+  user      User       @relation(fields: [user_name], references: [user_name])
+  comment   Comments[]
+  reaction  Reaction[]
+  views     View[]
+  createAt  DateTime   @default(now())
+  updateAt  DateTime   @updatedAt
+}
+
+model Comments {
+  id        String     @id @unique @default(uuid())
+  content   String[]
+  img       String?
+  createAt  DateTime   @default(now())
+  updateAt  DateTime   @updatedAt
+  user_name String
+  user      User       @relation("CommentUser", fields: [user_name], references: [user_name])
+  post_id   String
+  post      Post       @relation(fields: [post_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  reaction  Reaction[]
+  children  Comments[] @relation("Comment_Children")
+  parent    Comments?  @relation("Comment_Children", fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  parent_id String?
+  level     Int        @default(0)
+}
+
+model Reaction {
+  id         String       @id @default(uuid())
+  type       TypeReaction
+  user_name  String
+  user       User         @relation(fields: [user_name], references: [user_name])
+  comment_id String?
+  comment    Comments?    @relation(fields: [comment_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  post_id    String?
+  post       Post?        @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([user_name, comment_id])
+  @@unique([user_name, post_id])
+}
+
+model View {
+  id       String   @id @default(uuid())
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  user      User?   @relation(fields: [user_name], references: [user_name])
+  user_name String?
+  post      Post    @relation(fields: [post_id], references: [id])
+  post_id   String
+}
+
+enum RelationshipStatus {
+  STRANGER
+  FAMILY
+  FRIEND
+  ACQUAINTANCE
+}
+
+enum NotificationPreference {
+  MUTED_UNTIL_TOMORROW
+  MUTED_FOREVER
+  NORMAL
+}
+
+enum TypeStatusInvite {
+  PENDING // pending and cancel just rule of invition
+  CANCELING
+  ACCEPT // accept and reject just rule of invited 
+}
+
+enum TypeReaction {
+  LIKE
+  HAHA
+  LOVE
+  CRY
+}
+
+enum Role {
+  ADMIN
+  USER
+  MANAGER
+}
+
+enum TypeAuth {
+  JWT
+  EMAIl
+}
+
+enum TypeGender {
+  MALE
+  FEMALE
+  OTHERS
+}
+
+enum StatusSelf {
+  SELF
+  FRIEND
+  PENDING
+  STRANGER
+}
+
+enum ModePost {
+  PRIVATE
+  FRIEND
+  PUBLIC
+}
+
+// model Stories {
+//   id       String     @id @default(uuid())
+//   content  String
+//   user_name   Int
+//   user     User      @relation(fields: [user_name], references: [id])
+//   comment  Comments[]
+//   reaction Reaction[]
+//   img      String
+// }

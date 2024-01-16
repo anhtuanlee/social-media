@@ -1,0 +1,5 @@
+.item_input {
+  input:invalid ~ span {
+    display: block;
+  }
+}

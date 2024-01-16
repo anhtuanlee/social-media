@@ -1,0 +1,119 @@
+$black: #000;
+$darkblack: #06090c;
+$white: #fff;
+$lightgray: #e4e6eb;
+$darkgray: #494949;
+$coldgray: #686868;
+$ashgray: #a9a9a9;
+$red: #d93f21;
+$lightsky: #eef5ff;
+$lightblue: #5858fa;
+$darkblue: #150aa1;
+$typography-colors: (
+  black: $black,
+  darkblack: $darkblack,
+  white: $white,
+  lightgray: $lightgray,
+  darkgray: $darkgray,
+  coldgray: $coldgray,
+  ashgray: $ashgray,
+  red: $red,
+  lightsky: $lightsky,
+  lightblue: $lightblue,
+  darkblue: $darkblue,
+);
+$h0: (
+  fs: 240px,
+  fw: 500,
+);
+$h1: (
+  fs: 190px,
+  lh: 139.707px,
+  fw: 600,
+);
+
+$h2: (
+  fs: 36px,
+  lh: 44px,
+  fw: 600,
+);
+
+$h3: (
+  fs: 32px,
+  lh: 32px,
+  fw: 500,
+);
+
+$h4: (
+  fs: 26px,
+  lh: 26px,
+  fw: 700,
+);
+
+$body_lg__r: (
+  fs: 20px,
+  lh: 20px,
+  fw: 400,
+);
+$body_lg__s: (
+  fs: 20px,
+  lh: 20px,
+  fw: 500,
+);
+$body_lg__b: (
+  fs: 20px,
+  lh: 20px,
+  fw: 600,
+);
+$body_md__r: (
+  fs: 16px,
+  lh: 16px,
+  fw: 400,
+);
+$body_md__s: (
+  fs: 16px,
+  lh: 16px,
+  fw: 500,
+);
+$body_md__b: (
+  fs: 16px,
+  lh: 16px,
+  fw: 700,
+);
+$body_sm__r: (
+  fs: 14px,
+  lh: 16px,
+  fw: 400,
+);
+$body_sm__s: (
+  fs: 14px,
+  lh: 16px,
+  fw: 500,
+);
+$body_sm__b: (
+  fs: 14px,
+  lh: 16px,
+  fw: 700,
+);
+$body_s__r: (
+  fs: 12px,
+  lh: 16px,
+  fw: 400,
+);
+$body_s__s: (
+  fs: 12px,
+  lh: 16px,
+  fw: 500,
+);
+$body_s__b: (
+  fs: 12px,
+  lh: 16px,
+  fw: 700,
+);
+$xs: 0;
+$sm: 768px;
+$md: 1024px;
+$lg: 1200px;
+$xl: 1400px;
+$xxl: 1660px;
+$xxxl: 1920px;

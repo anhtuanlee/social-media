@@ -1,0 +1,20 @@
+.user {
+  gap: vw(8px);
+  margin-top: vw(20px);
+  &__avatar {
+    background: #fff;
+    padding: 2px;
+    position: relative;
+    width: vw(80px);
+    height: vw(80px);
+    overflow: hidden;
+    border-radius: 100px;
+    img {
+      padding: vw(3px);
+      border-radius: 100px;
+      position: absolute;
+      width: full;
+      height: auto;
+    }
+  }
+}

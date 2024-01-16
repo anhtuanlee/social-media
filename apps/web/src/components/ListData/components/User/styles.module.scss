@@ -1,0 +1,13 @@
+.timer {
+  svg {
+    width: rem(12px);
+    height: rem(12px);
+
+    path {
+      fill: $black;
+    }
+    circle {
+      fill: $black;
+    }
+  }
+}
