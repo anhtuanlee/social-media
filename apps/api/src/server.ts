@@ -13,7 +13,11 @@ const app = express();
 
 app.use(
     cors({
-        origin: ['http://localhost:3001', 'https://social-media-sooty-delta.vercel.app'],
+        origin: [
+            'http://localhost:3001',
+            'https://social-media-sooty-delta.vercel.app',
+            'https://social-media-web-blond.vercel.app/',
+        ],
         credentials: true,
     })
 );
