@@ -17,6 +17,7 @@
     "@types/react": "18.2.39",
     "@types/react-dom": "18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "ui": "*",
     "animate-css-grid": "^1.5.1",
     "autoprefixer": "10.4.16",
     "axios": "^1.6.2",
