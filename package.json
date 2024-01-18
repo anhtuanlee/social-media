@@ -3,7 +3,7 @@
 	"scripts": {
 		"build": "turbo run build",
 		"clean": "turbo run clean",
-		"deploy": "turbo run build --scope=apps --includeDependencies --no-deps",
+		"deploy": "turbo run build --scope=apps",
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\""
