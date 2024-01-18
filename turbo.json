@@ -4,12 +4,23 @@
 	"pipeline": {
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": ["dist/**", ".next/**"]
+			"outputs": ["dist/**", ".next/**", ".vercel/**"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"],
 			"cache": false
 		},
+		"web#build": {
+			"dependsOn": ["^build"],
+			"env": ["./apps/api/.env.production"],
+			"outputs": [".next/**", "!.next/cache/**"]
+		},
+		"api#build": {
+			"dependsOn": ["^build"],
+			"env": ["./apps/web/.env.local"],
+			"outputs": ["dist/**"]
+		},
+
 		"dev": {
 			"persistent": true,
 			"cache": false
