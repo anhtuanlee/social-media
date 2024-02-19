@@ -1,8 +1,16 @@
 /** @type {import('next').NextConfig} */
+var path = require('path');
 
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   trailingSlash: true,
+  output: 'standalone',
+  experimental: {
+    outputFileTracingIncludes: {
+      '/api': ['./api/**/*'],
+    },
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
   images: {
     remotePatterns: [
       {
