@@ -3,6 +3,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import path from 'path';
 import cookieParser from 'cookie-parser';
 import 'express-async-errors';
 // import * as multer from 'multer';
@@ -28,7 +29,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Router  API
 app.use('/api', router);
-
 //middleware error
 app.use(errorHandler);
 

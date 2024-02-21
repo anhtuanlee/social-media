@@ -1,15 +1,24 @@
 /** @type {import('next').NextConfig} */
-var path = require('path');
+
+const API_URL = process.env.NEXT_PUBLIC_API;
 
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   trailingSlash: true,
   output: 'standalone',
-  experimental: {
-    outputFileTracingIncludes: {
-      '/api': ['./api/**/*'],
-    },
-    outputFileTracingRoot: path.join(__dirname, '../../'),
+  // experimental: {
+  //   outputFileTracingIncludes: {
+  //     '/api': ['../api/**/*'],
+  //   },
+  //   outputFileTracingRoot: path.join(__dirname, '../../'),
+  // },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${API_URL}/:path*`,
+      },
+    ];
   },
   images: {
     remotePatterns: [

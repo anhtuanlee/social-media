@@ -4,7 +4,8 @@
 	"pipeline": {
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": ["dist/**", ".next/**", "package/**", ".svelte-kit/**"]
+			"outputs": ["dist/**"],
+			"dotEnv": [".env", ".env.local"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"],

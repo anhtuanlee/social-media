@@ -1,0 +1,19 @@
+{
+	"version": 2,
+	"github": {
+		"enable": false
+	},
+	"builds": [
+		{
+			"src": "/apps/api/src/index.ts",
+			"use": "@vercel/node",
+			"config": {
+				"includeFiles": ["db.json"]
+			}
+		},
+		{
+			"src": "/apps/web/.next/*",
+			"use": "@now/static"
+		}
+	]
+}
